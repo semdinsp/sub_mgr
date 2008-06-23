@@ -1,0 +1,64 @@
+class Keyword < ActiveRecord::Base
+  has_many :subscriptions
+  validates_presence_of     :name 
+   validates_uniqueness_of     :name 
+  before_destroy :delete_subscriptions
+  def find_subscription(msisdn)
+    return Subscription.find_by_msisdn_and_keyword_id(msisdn,self)
+  end
+  def self.find_subscription(keyword_name,msisdn)
+    k=Keyword.find_by_name(keyword_name)
+    k.find_subscription(msisdn) if k!=nil
+  end
+  def self.broadcast_to_subscriptions(sender, keyword_name,src, txt)
+     k=Keyword.find_by_name(keyword_name)
+     rawlist=[]
+     k.subscriptions.each {|s| rawlist << s.msisdn} if k!=nil
+     # sender=JMS_CONNECTION_MANAGER.my_connections['sms']
+     b=SmscManager::BroadcastTopic.new(sender,src,rawlist,txt)
+     b
+  end
+  def self.broadcast_text_mms_to_subscriptions(sender,keyword_name,src, txt, subject)
+     k=Keyword.find_by_name(keyword_name)
+     rawlist=[]
+        content=[]
+        content[0]= MmscManager::MmsMessage.build_text_content(txt)
+        #puts "content[0] is #{content[0].inspect}"
+        msisdn='63999'  #replace in broadcast
+        mms=MmscManager::MmsMessage.new('888',
+                          msisdn,subject,content)
+       k.subscriptions.each {|s| rawlist << s.msisdn} if k!=nil
+      #  sender=JMS_CONNECTION_MANAGER.my_connections['mms']
+       b=MmscManager::BroadcastTopic.new(sender,src,rawlist,mms)
+       b
+  end
+  def self.broadcast_mms_to_subscriptions(sender,keyword_name,src, mms)
+     k=Keyword.find_by_name(keyword_name)
+     rawlist=[]
+     #   sender=JMS_CONNECTION_MANAGER.my_connections['mms']
+       k.subscriptions.each {|s| rawlist << s.msisdn} if k!=nil
+       b=MmscManager::BroadcastTopic.new(sender,src,rawlist,mms)
+       b
+  end
+  def self.subscription_count(keyword_name)
+     k=Keyword.find_by_name(keyword_name)
+     count=-1
+     count=k.subscriptions.size if k!=nil
+     count
+  end
+  def self.check_status(keyword_name,msisdn)
+     k=Keyword.find_by_name(keyword_name)
+     s=Subscription.find_by_msisdn_and_keyword_id(msisdn,k)
+     s!=nil
+  end
+  def to_csv
+      csv = ""  
+      self.subscriptions.each {|s| csv << "#{s.msisdn}\n"}
+      return csv
+  end
+  def delete_subscriptions
+    self.subscriptions.each {|s| s.destroy}
+    
+  end
+  
+end

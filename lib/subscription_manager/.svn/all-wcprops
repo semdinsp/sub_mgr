@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn2/rails/!svn/ver/96/sub_mgr/lib/subscription_manager
+END
+control.rb
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn2/rails/!svn/ver/96/sub_mgr/lib/subscription_manager/control.rb
+END
+message.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn2/rails/!svn/ver/154/sub_mgr/lib/subscription_manager/message.rb
+END
+version.rb
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn2/rails/!svn/ver/178/sub_mgr/lib/subscription_manager/version.rb
+END
+subscription_server.rb
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn2/rails/!svn/ver/178/sub_mgr/lib/subscription_manager/subscription_server.rb
+END
+subscription_send_topic.rb
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn2/rails/!svn/ver/111/sub_mgr/lib/subscription_manager/subscription_send_topic.rb
+END

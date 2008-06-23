@@ -1,0 +1,1 @@
+Dir[File.join(File.dirname(__FILE__), 'subscription_manager/**/*.rb')].sort.each { |lib| require lib }

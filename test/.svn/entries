@@ -1,0 +1,50 @@
+8
+
+dir
+96
+http://oliver.ficonab.com/svn2/rails/sub_mgr/test
+http://oliver.ficonab.com/svn2/rails
+
+
+
+2007-10-16T08:48:38.612184Z
+96
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+ceeaca9f-745c-46d7-b156-2271164c1546
+
+subscription_manager_test.rb
+file
+111
+
+
+
+2007-10-19T12:06:47.000000Z
+8f941db0af4d7bf859c7f1bf80fe6dc8
+2007-10-22T14:31:26.440363Z
+111
+
+test_helper.rb
+file
+
+
+
+
+2007-10-16T08:49:53.000000Z
+5acf68b81da8e3c2c1d5ddaa0cde44cc
+2007-10-16T08:48:38.612184Z
+96
+
